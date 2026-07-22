@@ -32,10 +32,10 @@ const userSchema = new mongoose.Schema(
 );
 
 
-userSchema.pre('save',async function(next){
+userSchema.pre('save',async function(){
     if(!this.isModified('password')) return next();
     this.password=await bcrypt.hash(this.password,10);
-    next();
+    // next();
 });
 
 userSchema.methods.comparePassword=function(candidatePassword){
@@ -43,6 +43,6 @@ userSchema.methods.comparePassword=function(candidatePassword){
 
 };
 
-const User = mongoose.model('User',userSchema);
+const userModel = mongoose.model('User',userSchema);
 
-module.exports=User;
+export default userModel;
