@@ -5,8 +5,8 @@ const model = new ChatGoogleGenerativeAI({
   apiKey: process.env.GOOGLE_API_KEY,
 });
 
-export async function testAi(){
-    model.invoke("What is Ai ?").then((response) => {
-        console.log(response.text);
-    })
-}
+// export async function testAi(){
+//     model.invoke("What is Ai ?").then((response) => {
+//         console.log(response.text);
+//     })
+// }
