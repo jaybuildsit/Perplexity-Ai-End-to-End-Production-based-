@@ -2,12 +2,17 @@ import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router'
 import AuthInput from '../components/AuthInput'
 import { useAuth } from '../hooks/useAuth'
+import { useSelector } from 'react-redux'
+import { Navigate } from 'react-router'
 
 const Login = () => {
   const [formData, setFormData] = useState({
     email: '',
     password: '',
   })
+
+  const user = useSelector(state => state.auth.user)
+  const loading = useSelector(state => state.auth.loading)
 
   const { handleLogin } = useAuth()
 
@@ -28,6 +33,10 @@ const Login = () => {
     } catch (error) {
       console.error(error)
     }
+  }
+
+  if(!loading && user){
+    return <Navigate to="/" replace />
   }
 
   return (
