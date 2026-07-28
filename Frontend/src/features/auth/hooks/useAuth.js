@@ -35,19 +35,25 @@ export function useAuth() {
     }
 
     async function handleGetMe() {
+        console.log("handleGetMe called");
+
         try {
-            dispatch(setLoading(true))
-            const data = await getMe()
-            dispatch(setUser(data.user))
+            dispatch(setLoading(true));
+
+            const data = await getMe();
+
+            console.log(data);
+
+            dispatch(setUser(data.user));
         } catch (error) {
-            dispatch(setError(error.response?.data?.message || "Failed to fetch user Details!!!!"))
+            console.log(error);
         } finally {
-            dispatch(setLoading(false))
+            dispatch(setLoading(false));
         }
     }
 
-    return{
-        handleRegister,handleLogin,handleGetMe
+    return {
+        handleRegister, handleLogin, handleGetMe
     }
 
 }
