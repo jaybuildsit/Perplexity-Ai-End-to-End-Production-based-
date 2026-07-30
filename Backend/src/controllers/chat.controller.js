@@ -31,9 +31,9 @@ export async function sendMessage(req, res) {
     })
 
 
-    
 
-    const messages = await messageModel.find({ chat: chatId })
+
+    const messages = await messageModel.find({ chat: chatId || chat._id })
 
     const result = await generateResponse(messages);
 
@@ -103,7 +103,7 @@ export async function deleteChats(req, res) {
     })
 
     await messageModel.deleteMany({ chat: chatId })
-    
+
     if (!chat) {
         return res.status(404).json({
             message: "Chat not found"
